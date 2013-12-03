@@ -1,11 +1,18 @@
 require 'artoo/adaptors/adaptor'
+require 'http'
 
 module Artoo
   module Adaptors
     # Connect to a spark device
     # @see device documentation for more information
     class Spark < Adaptor
-      attr_reader :device
+      attr_reader :device_id, :access_token
+
+      def initialize(params={})
+        @device_id = params[:device_id]
+        @access_token = params[:access_token]
+        super
+      end
 
       # Creates a connection with device
       # @return [Boolean]
@@ -27,19 +34,24 @@ module Artoo
 
       # GPIO - digital
       def digital_write(pin, level)
-
+        url = device_url + "/digitalwrite"
+        post(url, {:params => "#{pin},#{level}"})
       end
 
       def digital_read(pin)
-        value = nil
-        value
+        url = device_url + "/digitalread"
+        post(url, {:params => pin})
       end
       
       # GPIO - analog
-      # NOTE pins are numbered A0-A5, which translate to digital pins 14-19
+      def analog_write(pin, level)
+        url = device_url + "/analogwrite"
+        post(url, {:params => "#{pin},#{level}"})
+      end
+
       def analog_read(pin)
-        value = 0
-        value
+        url = device_url + "/analogread"
+        post(url, {:params => pin})
       end
 
       # GPIO - PWM
@@ -50,6 +62,15 @@ module Artoo
       # GPIO - servo
       def servo_write(pin, angle)
         analog_write(pin, angle)
+      end
+
+      def post(url, data={})
+        data[:access_token] = access_token
+        HTTP.post(url, socket_class: Celluloid::IO::TCPSocket, :form => data).response
+      end
+
+      def device_url
+        "https://api.spark.io/v1/devices/#{device_id}"
       end
     end
   end
