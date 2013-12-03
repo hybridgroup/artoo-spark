@@ -6,11 +6,12 @@ Gem::Specification.new do |s|
   s.name        = "artoo-spark"
   s.version     = Artoo::Spark::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Your name here"]
-  s.email       = ["your email here"]
-  s.homepage    = "Your homepage here"
-  s.summary     = %q{Artoo adaptor and driver for Spark}
-  s.description = %q{Artoo adaptor and driver for Spark}
+  s.authors     = ["Ron Evans"]
+  s.email       = ["artoo@hybridgroup.com"]
+  s.homepage    = "https://github.com/hybridgroup/artoo-spark"
+  s.summary     = %q{Artoo adaptor for Spark}
+  s.description = %q{Artoo adaptor for Spark}
+  s.license     = 'Apache 2.0'
 
   s.rubyforge_project = "artoo-spark"
 
@@ -20,9 +21,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'artoo', '>= 1.4.1'
-  # TODO: add your development dependencies here
-  # EXAMPLE:
-  # s.add_development_dependency 'minitest', '>= 5.0'
-  # s.add_development_dependency 'minitest-happy'
-  # s.add_development_dependency 'mocha', '>= 0.14.0'
+  s.add_development_dependency 'minitest', '>= 5.0'
+  s.add_development_dependency 'minitest-happy'
+  s.add_development_dependency 'mocha', '>= 0.14.0'
 end
