@@ -9,8 +9,8 @@ module Artoo
       attr_reader :device_id, :access_token
 
       def initialize(params={})
-        @device_id = params[:device_id]
-        @access_token = params[:access_token]
+        @device_id = params[:additional_params][:device_id]
+        @access_token = params[:additional_params][:access_token]
         super
       end
 
@@ -35,7 +35,7 @@ module Artoo
       # GPIO - digital
       def digital_write(pin, level)
         url = device_url + "/digitalwrite"
-        post(url, {:params => "#{pin},#{level}"})
+        post(url, {:params => "#{pin},#{level.upcase}"})
       end
 
       def digital_read(pin)
@@ -46,7 +46,7 @@ module Artoo
       # GPIO - analog
       def analog_write(pin, level)
         url = device_url + "/analogwrite"
-        post(url, {:params => "#{pin},#{level}"})
+        post(url, {:params => "#{pin},#{level.upcase}"})
       end
 
       def analog_read(pin)
@@ -66,7 +66,7 @@ module Artoo
 
       def post(url, data={})
         data[:access_token] = access_token
-        HTTP.post(url, socket_class: Celluloid::IO::TCPSocket, :form => data).response
+        HTTP.post(url, :form => data).response
       end
 
       def device_url

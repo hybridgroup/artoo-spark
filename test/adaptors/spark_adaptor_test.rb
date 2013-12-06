@@ -3,7 +3,7 @@ require 'artoo/adaptors/spark'
 
 describe Artoo::Adaptors::Spark do
   before do
-    @adaptor = Artoo::Adaptors::Spark.new(:access_token => "ABC123")
+    @adaptor = Artoo::Adaptors::Spark.new(:additional_params => {:device_id => "AABBCCDD", :access_token => "ABC123"})
   end
 
   it 'Artoo::Adaptors::Spark#connect' do
