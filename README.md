@@ -14,15 +14,14 @@ For more information abut Artoo, check out our repo at https://github.com/hybrid
 gem install artoo-spark
 ```
 
-You will need to have a Spark device, and an access token from a registered Spark account. 
-
+You will need to have a Spark device, it's device ID (found via https://spark.io's Build tool), and an access token from a registered Spark account. 
 
 ## Using
 
 ```ruby
 require 'artoo'
 
-connection :spark, :adaptor => :spark, :access_token => 'XYZABC123'
+connection :spark, :adaptor => :spark, :access_token => 'XYZABC123', :device_id => '123ABC456'
 device :led, :driver => :led, :pin => 'D0'
 
 work do
