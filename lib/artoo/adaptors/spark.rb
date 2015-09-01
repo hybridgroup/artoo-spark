@@ -42,7 +42,7 @@ module Artoo
         url = device_url + "/digitalread"
         post(url, {:params => pin})
       end
-      
+
       # GPIO - analog
       def analog_write(pin, level)
         url = device_url + "/analogwrite"
@@ -66,7 +66,7 @@ module Artoo
 
       def post(url, data={})
         data[:access_token] = access_token
-        HTTP.post(url, :form => data).response
+        HTTP.post(url, :form => data)
       end
 
       def device_url
