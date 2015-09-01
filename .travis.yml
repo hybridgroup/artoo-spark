@@ -7,4 +7,5 @@ rvm:
   - rbx-2.1.1
 matrix:
   allow_failures:
-    - rvm: jruby-1.7.9
+    - jruby: jruby-1.7.9
+    - rbx: rbx-2.1.1
